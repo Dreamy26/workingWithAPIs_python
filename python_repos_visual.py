@@ -20,21 +20,21 @@ print(f"Total repositories: {response_dict['total_count']}")
 # Receive information about the repositories & store a list of dictionaries
 repo_dicts = response_dict['items']
 #print(f'Repositories returned: {len(repo_dicts)}')
-repo_names, stars = [],[] # two empty arrays
+repo_names, stars = [],[] # two empty arrays, for the initial chart data
 for repo_dict in repo_dicts: # Loop, to iterate through all the dictionaries
-    repo_names.append(repo_dict['name']) # add 
+    repo_names.append(repo_dict['name']) # append name of project, & number of stars
     stars.append(repo_dict['stargazers_count'])
     
-    # Visualization Code starts here
+    # Visualization Code starts here & define the data list
 data =[{
     'type': 'bar',
-    'x': repo_names,
-    'y': stars,
+    'x': repo_names, # x = name of the projects
+    'y': stars, # y = stars received 
 }]
 my_layout = {
-    'title': 'Most-Starred Python Projects on GitHub',
-    'xaxis': {'title': 'Repository'},
-    'yaxis': {'title': 'Stars'},
+    'title': 'Most-Starred Python Projects on GitHub', # Title of Bar graph visual
+    'xaxis': {'title': 'Repository'}, # bar label
+    'yaxis': {'title': 'Stars'}, # height of bars
 }
 fig = {'data': data, 'layout': my_layout}
 offline.plot(fig, filename='python_repos.html')
